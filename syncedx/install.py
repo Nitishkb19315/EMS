@@ -1,6 +1,5 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
-from frappe.desk.page.setup_wizard.setup_wizard import make_records
 from frappe.permissions import add_permission, update_permission_property
 
 
@@ -14,15 +13,64 @@ def after_install():
 
 
 def setup_fixtures():
-	records = [
-		# Party Type Records
-		{"doctype": "Party Type", "party_type": "Student", "account_type": "Receivable"},
-		# Item Group Records
-		{"doctype": "Item Group", "item_group_name": "Fee Component"},
-		# Customer Group Records
-		{"doctype": "Customer Group", "customer_group_name": "Student"},
-	]
-	make_records(records)
+	# Party Type Records
+	if not frappe.db.exists("Party Type", "Student"):
+		try:
+			frappe.get_doc(
+				{
+					"doctype": "Party Type",
+					"party_type": "Student",
+					"account_type": "Receivable",
+				}
+			).insert(ignore_permissions=True)
+		except Exception:
+			pass
+
+	# Item Group Records
+	if not frappe.db.exists("Item Group", "Fee Component"):
+		try:
+			parent_item_group = (
+				frappe.db.get_value(
+					"Item Group", {"is_group": 1, "parent_item_group": ("in", ["", None])}, "name"
+				)
+				or "All Item Groups"
+			)
+			if not frappe.db.exists("Item Group", parent_item_group):
+				parent_item_group = frappe.db.get_value("Item Group", {"is_group": 1}, "name")
+
+			frappe.get_doc(
+				{
+					"doctype": "Item Group",
+					"item_group_name": "Fee Component",
+					"parent_item_group": parent_item_group,
+					"is_group": 0,
+				}
+			).insert(ignore_permissions=True)
+		except Exception:
+			pass
+
+	# Customer Group Records
+	if not frappe.db.exists("Customer Group", "Student"):
+		try:
+			parent_customer_group = (
+				frappe.db.get_value(
+					"Customer Group", {"is_group": 1, "parent_customer_group": ("in", ["", None])}, "name"
+				)
+				or "All Customer Groups"
+			)
+			if not frappe.db.exists("Customer Group", parent_customer_group):
+				parent_customer_group = frappe.db.get_value("Customer Group", {"is_group": 1}, "name")
+
+			frappe.get_doc(
+				{
+					"doctype": "Customer Group",
+					"customer_group_name": "Student",
+					"parent_customer_group": parent_customer_group,
+					"is_group": 0,
+				}
+			).insert(ignore_permissions=True)
+		except Exception:
+			pass
 
 
 def create_parent_assessment_group():
@@ -42,16 +90,21 @@ def create_student_role():
 
 
 def create_invoice_permissions():
-	add_permission("Sales Invoice", "Student", 0)
-
 	doctype = "Sales Invoice"
 	role = "Student"
 	permlevel = 0
 	ptype = ["read", "write", "print"]
 
+	try:
+		add_permission(doctype, role, permlevel)
+	except Exception:
+		pass
+
 	for p in ptype:
-		# update permissions
-		update_permission_property(doctype, role, permlevel, p, 1)
+		try:
+			update_permission_property(doctype, role, permlevel, p, 1)
+		except Exception:
+			pass
 
 
 def get_permissions():
@@ -83,9 +136,15 @@ def create_permissions(doctype_permissions):
 		role = doctype_permission.get("role")
 		permlevel = doctype_permission.get("permlevel")
 		ptype = doctype_permission.get("ptype")
-		add_permission(doctype, role, permlevel)
+		try:
+			add_permission(doctype, role, permlevel)
+		except Exception:
+			pass
 		for p in ptype:
-			update_permission_property(doctype, role, permlevel, p, 1)
+			try:
+				update_permission_property(doctype, role, permlevel, p, 1)
+			except Exception:
+				pass
 
 
 def get_custom_fields():
