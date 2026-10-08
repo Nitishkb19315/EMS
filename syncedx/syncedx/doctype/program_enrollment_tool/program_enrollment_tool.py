@@ -14,7 +14,6 @@ class ProgramEnrollmentTool(Document):
 	def onload(self):
 		academic_term_reqd = cint(
 			frappe.db.get_single_value("SyncEdx Settings", "academic_term_reqd")
-			or frappe.db.get_single_value("Education Settings", "academic_term_reqd")
 		)
 		self.set_onload("academic_term_reqd", academic_term_reqd)
 

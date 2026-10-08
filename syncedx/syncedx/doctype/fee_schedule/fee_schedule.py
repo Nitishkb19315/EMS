@@ -13,10 +13,7 @@ from frappe.utils.csvutils import getlink
 
 
 def get_setting(fieldname):
-	return (
-		frappe.db.get_single_value("SyncEdx Settings", fieldname)
-		or frappe.db.get_single_value("Education Settings", fieldname)
-	)
+	return frappe.db.get_single_value("SyncEdx Settings", fieldname)
 
 
 class FeeSchedule(Document):

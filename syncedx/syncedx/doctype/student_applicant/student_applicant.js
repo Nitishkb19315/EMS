@@ -69,11 +69,6 @@ frappe.ui.form.on('Student Applicant', {
     })
 
     frappe.db.get_single_value('SyncEdx Settings', 'user_creation_skip').then((val) => {
-      if (val === null || val === undefined) {
-        return frappe.db.get_single_value('Education Settings', 'user_creation_skip')
-      }
-      return val
-    }).then((val) => {
       if (cint(val) !== 1) {
         frm.set_df_property('student_email_id', 'reqd', 1)
       }

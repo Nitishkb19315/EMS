@@ -87,10 +87,7 @@ class TestFeeSchedule(FrappeTestCase):
 		self.assertEqual(fee_schedule_status, "Invoice Created")
 
 		# create_so from settings set to 1
-		if frappe.db.exists("DocType", "SyncEdx Settings"):
-			settings_doctype = "SyncEdx Settings"
-		else:
-			settings_doctype = "Education Settings"
+		settings_doctype = "SyncEdx Settings"
 		frappe.db.set_value(settings_doctype, settings_doctype, "create_so", 1)
 		fee_schedule = create_fee_schedule(submit=1)
 

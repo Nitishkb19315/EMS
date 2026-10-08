@@ -70,9 +70,8 @@ class Student(Document):
 
 	def validate_user(self):
 		"""Create a website user for student creation if not already exists"""
-		skip_user_creation = (
-			frappe.db.get_single_value("SyncEdx Settings", "user_creation_skip")
-			or frappe.db.get_single_value("Education Settings", "user_creation_skip")
+		skip_user_creation = frappe.db.get_single_value(
+			"SyncEdx Settings", "user_creation_skip"
 		)
 		if not skip_user_creation and not frappe.db.exists("User", self.student_email_id):
 			student_user = frappe.get_doc(

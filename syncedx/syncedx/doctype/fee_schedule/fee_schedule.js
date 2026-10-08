@@ -105,11 +105,6 @@ frappe.ui.form.on('Fee Schedule', {
 
       const get_create_so = (cb) => {
         frappe.db.get_single_value('SyncEdx Settings', 'create_so').then((val) => {
-          if (val === null || val === undefined) {
-            return frappe.db.get_single_value('Education Settings', 'create_so')
-          }
-          return val
-        }).then((val) => {
           cb({ create_so: val })
         })
       }

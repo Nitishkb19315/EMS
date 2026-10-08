@@ -605,9 +605,8 @@ def get_course_schedule_for_student(program_name, student_groups):
 
 @frappe.whitelist()
 def apply_leave(leave_data, program_name):
-	attendance_based_on_course_schedule = (
-		frappe.db.get_single_value("SyncEdx Settings", "attendance_based_on_course_schedule")
-		or frappe.db.get_single_value("Education Settings", "attendance_based_on_course_schedule")
+	attendance_based_on_course_schedule = frappe.db.get_single_value(
+		"SyncEdx Settings", "attendance_based_on_course_schedule"
 	)
 	if attendance_based_on_course_schedule:
 		apply_leave_based_on_course_schedule(leave_data, program_name)
@@ -752,14 +751,8 @@ def get_program_from_fee_schedule(fee_schedule):
 
 @frappe.whitelist()
 def get_school_abbr_logo():
-	abbr = (
-		frappe.db.get_single_value("SyncEdx Settings", "school_college_name_abbreviation")
-		or frappe.db.get_single_value("Education Settings", "school_college_name_abbreviation")
-	)
-	logo = (
-		frappe.db.get_single_value("SyncEdx Settings", "school_college_logo")
-		or frappe.db.get_single_value("Education Settings", "school_college_logo")
-	)
+	abbr = frappe.db.get_single_value("SyncEdx Settings", "school_college_name_abbreviation")
+	logo = frappe.db.get_single_value("SyncEdx Settings", "school_college_logo")
 	return {"name": abbr, "logo": logo}
 
 

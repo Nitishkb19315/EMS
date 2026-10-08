@@ -64,10 +64,7 @@ class ProgramEnrollment(Document):
 	def make_fee_records(self):
 		from syncedx.syncedx.api import get_fee_components
 
-		create_so = (
-			frappe.db.get_single_value("SyncEdx Settings", "create_so")
-			or frappe.db.get_single_value("Education Settings", "create_so")
-		)
+		create_so = frappe.db.get_single_value("SyncEdx Settings", "create_so")
 
 		fees_list = []
 		doctype = ""

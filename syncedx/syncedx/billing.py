@@ -16,10 +16,7 @@ def get_details(docname):
 
 
 def get_client():
-	if frappe.db.exists("DocType", "SyncEdx Settings"):
-		settings = frappe.get_single("SyncEdx Settings")
-	else:
-		settings = frappe.get_single("Education Settings")
+	settings = frappe.get_single("SyncEdx Settings")
 	razorpay_key = settings.razorpay_key
 	razorpay_secret = settings.get_password("razorpay_secret", raise_exception=True)
 	if not razorpay_key and not razorpay_secret:
@@ -55,10 +52,7 @@ def get_payment_options(doctype, docname, phone, currency=None):
 	details = get_details(docname)
 	client = get_client()
 	order = create_order(client, details.outstanding_amount, details.currency)
-	key_id = (
-		frappe.db.get_single_value("SyncEdx Settings", "razorpay_key")
-		or frappe.db.get_single_value("Education Settings", "razorpay_key")
-	)
+	key_id = frappe.db.get_single_value("SyncEdx Settings", "razorpay_key")
 	options = {
 		"key_id": key_id,
 		"name": frappe.db.get_single_value("Website Settings", "app_name"),
