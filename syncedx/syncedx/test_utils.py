@@ -1,7 +1,7 @@
 import frappe
 from syncedx.syncedx.doctype.fee_schedule.fee_schedule import get_fee_structure
 from syncedx.syncedx.doctype.student_group.student_group import get_students
-from erpnext.setup.utils import enable_all_roles_and_domains
+from syncerp.setup.utils import enable_all_roles_and_domains
 from frappe.utils import now_datetime, add_years, nowdate
 
 
@@ -33,7 +33,7 @@ def before_tests():
 				"fy_end_date": f"{year}-12-31",
 				"language": "english",
 				"company_tagline": "Testing",
-				"email": "test@erpnext.com",
+				"email": "test@syncerp.com",
 				"password": "test",
 				"chart_of_accounts": "Standard",
 			}

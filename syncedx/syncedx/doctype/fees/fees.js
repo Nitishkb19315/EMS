@@ -1,11 +1,11 @@
 // Copyright (c) 2017, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
 
-frappe.provide('erpnext.accounts.dimensions')
+frappe.provide('syncerp.accounts.dimensions')
 
 frappe.ui.form.on('Fees', {
   company: function (frm) {
-    erpnext.accounts.dimensions.update_dimension(frm, frm.doctype)
+    syncerp.accounts.dimensions.update_dimension(frm, frm.doctype)
   },
   onload: function (frm) {
     frm.set_query('academic_term', function () {
@@ -54,7 +54,7 @@ frappe.ui.form.on('Fees', {
     if (!frm.doc.posting_date) {
       frm.doc.posting_date = frappe.datetime.get_today()
     }
-    erpnext.accounts.dimensions.setup_dimension_filters(frm, frm.doctype)
+    syncerp.accounts.dimensions.setup_dimension_filters(frm, frm.doctype)
   },
 
   refresh: function (frm) {
@@ -131,7 +131,7 @@ frappe.ui.form.on('Fees', {
     } else {
       frappe.call({
         method:
-          'erpnext.accounts.doctype.payment_request.payment_request.make_payment_request',
+          'syncerp.accounts.doctype.payment_request.payment_request.make_payment_request',
         args: {
           dt: frm.doc.doctype,
           dn: frm.doc.name,
@@ -153,7 +153,7 @@ frappe.ui.form.on('Fees', {
   make_payment_entry: function (frm) {
     return frappe.call({
       method:
-        'erpnext.accounts.doctype.payment_entry.payment_entry.get_payment_entry',
+        'syncerp.accounts.doctype.payment_entry.payment_entry.get_payment_entry',
       args: {
         dt: frm.doc.doctype,
         dn: frm.doc.name,

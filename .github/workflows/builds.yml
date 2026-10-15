@@ -39,7 +39,7 @@ jobs:
 
       - name: Set Branch
         run: |
-          export APPS_JSON='[{"url": "https://github.com/frappe/erpnext","branch": "${{ github.ref_name }}"},{"url": "https://github.com/${{ github.repository }}","branch": "${{ github.ref_name }}"}]'
+          export APPS_JSON='[{"url": "https://github.com/Nitishkb19315/SyncERP","branch": "${{ github.ref_name }}"},{"url": "https://github.com/${{ github.repository }}","branch": "${{ github.ref_name }}"}]'
           echo "APPS_JSON_BASE64=$(echo $APPS_JSON | base64 -w 0)" >> $GITHUB_ENV
           echo "FRAPPE_BRANCH=${{ github.ref_type == 'tag' || github.ref_name == 'version-15' && 'version-15' || 'develop' }}" >> $GITHUB_ENV
 

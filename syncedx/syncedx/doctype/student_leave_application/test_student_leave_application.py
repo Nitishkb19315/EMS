@@ -4,7 +4,7 @@
 
 import frappe
 from frappe.tests.utils import FrappeTestCase
-from erpnext import get_default_company
+from syncerp import get_default_company
 from frappe.utils import add_days, add_months, getdate
 
 from syncedx.syncedx.test_utils import (

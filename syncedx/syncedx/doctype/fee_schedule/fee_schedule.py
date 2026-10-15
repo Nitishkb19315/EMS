@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 
-import erpnext
+import syncerp
 import frappe
 from frappe import _
 from frappe.model.document import Document
@@ -44,7 +44,7 @@ class FeeSchedule(Document):
 		info = {
 			"total_paid": 0,
 			"total_unpaid": 0,
-			"currency": erpnext.get_company_currency(self.company),
+			"currency": syncerp.get_company_currency(self.company),
 		}
 
 		fees_amount = frappe.db.sql(

@@ -11,7 +11,7 @@ app_color = "grey"
 app_email = "hello@syncmind.com"
 app_license = "GNU GPL V3"
 
-required_apps = ["erpnext"]
+required_apps = ["syncerp"]
 
 add_to_apps_screen = [
 	{

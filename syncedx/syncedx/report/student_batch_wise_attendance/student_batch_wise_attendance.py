@@ -3,7 +3,7 @@
 
 
 import frappe
-from erpnext.setup.doctype.holiday_list.holiday_list import is_holiday
+from syncerp.setup.doctype.holiday_list.holiday_list import is_holiday
 from frappe import _, msgprint
 from frappe.utils import formatdate
 

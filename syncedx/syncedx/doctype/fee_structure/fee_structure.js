@@ -1,10 +1,10 @@
 // Copyright (c) 2017, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
 
-frappe.provide('erpnext.accounts.dimensions')
+frappe.provide('syncerp.accounts.dimensions')
 frappe.ui.form.on('Fee Structure', {
   company: function (frm) {
-    erpnext.accounts.dimensions.update_dimension(frm, frm.doctype)
+    syncerp.accounts.dimensions.update_dimension(frm, frm.doctype)
   },
 
   onload: function (frm) {
@@ -26,7 +26,7 @@ frappe.ui.form.on('Fee Structure', {
       }
     })
 
-    erpnext.accounts.dimensions.setup_dimension_filters(frm, frm.doctype)
+    syncerp.accounts.dimensions.setup_dimension_filters(frm, frm.doctype)
   },
 
   refresh: function (frm) {

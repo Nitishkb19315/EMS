@@ -2,10 +2,10 @@ import frappe
 from frappe import _
 from frappe.utils import validate_phone_number, cint, nowdate
 import razorpay
-from erpnext.accounts.doctype.journal_entry.journal_entry import (
+from syncerp.accounts.doctype.journal_entry.journal_entry import (
 	get_payment_entry_against_invoice,
 )
-from erpnext.accounts.doctype.payment_entry.test_payment_entry import get_payment_entry
+from syncerp.accounts.doctype.payment_entry.test_payment_entry import get_payment_entry
 
 
 def get_details(docname):

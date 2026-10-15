@@ -25,7 +25,7 @@
 
 SyncEdx is an open-source and user-friendly Education Management System
 designed to streamline the administrative and academic processes of educational
-institutions. It is a powerful module based on the ERPNext software.
+institutions. It is a powerful module based on the SyncERP software.
 
 ### Motivation
 
@@ -94,9 +94,9 @@ education management more efficient and less time-consuming.
 - [**Frappe Framework**](https://github.com/frappe/frappe): A full-stack web
   application framework written in Python and Javascript.
 
-- [**ERPNext**](https://github.com/frappe/erpnext) - An open-source, modern ERP
-  system that includes modules for accounting, inventory, manufacturing, and
-  more.
+- [**SyncERP**](https://github.com/Nitishkb19315/SyncERP) - An open-source,
+  modern ERP system (a fork of ERPNext) that includes modules for accounting,
+  inventory, manufacturing, and more.
 
 - [**Frappe UI**](https://github.com/frappe/frappe-ui): A Vue-based UI library,
   to provide a modern user interface.
@@ -158,8 +158,9 @@ the necessary configurations in about 5 minutes.
 
 1. Install bench and setup a `frappe-bench` directory by following the
    [Installation Steps](https://frappeframework.com/docs/user/en/installation)
-1. Install ERPNext by running `bench get-app erpnext`
-1. Once ERPNext is installed, install the SyncEdx App by using
+1. Install SyncERP by running
+   `bench get-app https://github.com/Nitishkb19315/SyncERP`
+1. Once SyncERP is installed, install the SyncEdx App by using
    `bench get-app syncedx`
 
 1. In a separate terminal window, create a new site by running

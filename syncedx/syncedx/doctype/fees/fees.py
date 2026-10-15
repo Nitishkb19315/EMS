@@ -2,13 +2,13 @@
 # For license information, please see license.txt
 
 
-import erpnext
+import syncerp
 import frappe
-from erpnext.accounts.doctype.payment_request.payment_request import (
+from syncerp.accounts.doctype.payment_request.payment_request import (
 	make_payment_request,
 )
-from erpnext.accounts.general_ledger import make_reverse_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
+from syncerp.accounts.general_ledger import make_reverse_gl_entries
+from syncerp.controllers.accounts_controller import AccountsController
 from frappe import _
 from frappe.utils import money_in_words
 from frappe.utils.csvutils import getlink
@@ -33,7 +33,7 @@ class Fees(AccountsController):
 		if not self.company:
 			self.company = frappe.defaults.get_defaults().company
 		if not self.currency:
-			self.currency = erpnext.get_company_currency(self.company)
+			self.currency = syncerp.get_company_currency(self.company)
 		if not (self.receivable_account and self.income_account and self.cost_center):
 			accounts_details = frappe.get_all(
 				"Company",
@@ -142,7 +142,7 @@ class Fees(AccountsController):
 			item=self,
 		)
 
-		from erpnext.accounts.general_ledger import make_gl_entries
+		from syncerp.accounts.general_ledger import make_gl_entries
 
 		make_gl_entries(
 			[student_gl_entries, fee_gl_entry],

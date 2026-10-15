@@ -3,7 +3,7 @@
 
 
 import frappe
-from erpnext.support.doctype.issue.issue import get_holidays
+from syncerp.support.doctype.issue.issue import get_holidays
 from frappe import _
 from frappe.utils import add_days, cstr, date_diff, get_first_day, get_last_day, getdate
 

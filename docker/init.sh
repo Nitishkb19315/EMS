@@ -24,7 +24,7 @@ bench set-redis-socketio-host redis://redis:6379
 sed -i '/redis/d' ./Procfile
 sed -i '/watch/d' ./Procfile
 
-bench get-app erpnext
+bench get-app https://github.com/Nitishkb19315/SyncERP
 bench get-app syncedx
 
 bench new-site syncedx.localhost \
@@ -33,7 +33,7 @@ bench new-site syncedx.localhost \
 --admin-password admin \
 --no-mariadb-socket
 
-bench --site syncedx.localhost install-app erpnext
+bench --site syncedx.localhost install-app syncerp
 bench --site syncedx.localhost install-app syncedx
 bench --site syncedx.localhost set-config developer_mode 1
 bench --site syncedx.localhost enable-scheduler
